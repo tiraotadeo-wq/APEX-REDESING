@@ -111,7 +111,7 @@ enum AppThemePreferences {
     static let spectrumSliderStorageKey = "theme.accent.spectrum.position"
 
     static var defaultAppearance: AppAppearanceMode { .system }
-    static var defaultAccent: AppAccentSpectrum { .azure }
+    static var defaultAccent: AppAccentSpectrum { .crimson }
 }
 
 // MARK: - Semantic colors
@@ -120,19 +120,19 @@ enum AppTheme {
     static var accent: Color {
         let raw = UserDefaults.standard.string(forKey: AppThemePreferences.accentStorageKey)
             ?? AppThemePreferences.defaultAccent.rawValue
-        return (AppAccentSpectrum(rawValue: raw) ?? .azure).color
+        return (AppAccentSpectrum(rawValue: raw) ?? .crimson).color
     }
 
     static var accentDeep: Color {
         let raw = UserDefaults.standard.string(forKey: AppThemePreferences.accentStorageKey)
             ?? AppThemePreferences.defaultAccent.rawValue
-        return (AppAccentSpectrum(rawValue: raw) ?? .azure).deepColor
+        return (AppAccentSpectrum(rawValue: raw) ?? .crimson).deepColor
     }
 
     static var accentSoft: Color {
         let raw = UserDefaults.standard.string(forKey: AppThemePreferences.accentStorageKey)
             ?? AppThemePreferences.defaultAccent.rawValue
-        return (AppAccentSpectrum(rawValue: raw) ?? .azure).softColor
+        return (AppAccentSpectrum(rawValue: raw) ?? .crimson).softColor
     }
 
     static var accentGradient: LinearGradient {

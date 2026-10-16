@@ -46,7 +46,7 @@ struct GameItemCategory: RawRepresentable, Codable, Identifiable, Hashable {
     var title: String {
         switch rawValue {
         case "aim": return "AIM"
-        case "location": return "Định vị"
+        case "location": return "Location"
         case "mod": return "Mod"
         default: return rawValue.uppercased()
         }

@@ -101,7 +101,7 @@ workflows:
 
           rm -rf "$CM_BUILD_DIR/build"
           rm -rf "$CM_BUILD_DIR/Payload"
-          rm -f "$CM_BUILD_DIR"/APEX-IPA-*.ipa
+          rm -f "$CM_BUILD_DIR"/X7-EXTERNAL-*.ipa
           rm -f "$CM_BUILD_DIR/3105.ipa"
 
           echo "Clean completed"
@@ -203,7 +203,7 @@ workflows:
             -print 2>/dev/null || true
 
       # ======================================================
-      # 7. TIM APEX IPA.APP
+      # 7. FIND BUILT APP
       # ======================================================
       - name: Find built app
         script: |
@@ -239,7 +239,7 @@ workflows:
           if [ -z "$APP_PATH" ] || [ ! -d "$APP_PATH" ]; then
             echo ""
             echo "======================================"
-            echo "ERROR: KHONG TIM THAY APP"
+            echo "ERROR: BUILT APP NOT FOUND"
             echo "======================================"
             echo ""
             echo "Build tree:"
@@ -303,7 +303,7 @@ workflows:
           du -sh "$APP_PATH"
 
       # ======================================================
-      # 8. TAO PAYLOAD
+      # 8. CREATE PAYLOAD
       # ======================================================
       - name: Create Payload
         script: |
@@ -326,7 +326,7 @@ workflows:
           VERSION_MINOR=$(((VERSION_OFFSET / 10) % 10))
           VERSION_PATCH=$((VERSION_OFFSET % 10))
           APP_VERSION="$VERSION_MAJOR.$VERSION_MINOR.$VERSION_PATCH"
-          APP_DISPLAY_NAME="APEX IPA [$APP_VERSION]"
+          APP_DISPLAY_NAME="X7 EXTERNAL [$APP_VERSION]"
           printf '%s' "$APP_VERSION" > /tmp/app_version.txt
 
           /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $APP_VERSION" "$APP_PATH/Info.plist"
@@ -359,9 +359,9 @@ workflows:
           find Payload -maxdepth 2 -print
 
       # ======================================================
-      # 9. DONG GOI IPA
+      # 9. PACKAGE IPA
       # ======================================================
-      - name: Create APEX IPA
+      - name: Create X7 EXTERNAL IPA
         script: |
           cd "$CM_BUILD_DIR"
 
@@ -370,10 +370,10 @@ workflows:
           echo "======================================"
 
           APP_VERSION=$(cat /tmp/app_version.txt)
-          IPA_NAME="APEX-IPA-[$APP_VERSION].ipa"
+          IPA_NAME="X7-EXTERNAL-[$APP_VERSION].ipa"
           IPA_PATH="$CM_BUILD_DIR/$IPA_NAME"
 
-          rm -f "$CM_BUILD_DIR"/APEX-IPA-*.ipa
+          rm -f "$CM_BUILD_DIR"/X7-EXTERNAL-*.ipa
 
           /usr/bin/zip \
             -qry \
@@ -387,7 +387,7 @@ workflows:
           fi
 
           if [ ! -f "$IPA_PATH" ]; then
-            echo "ERROR: Khong tao duoc $IPA_NAME"
+            echo "ERROR: Could not create $IPA_NAME"
             exit 1
           fi
 
@@ -401,7 +401,7 @@ workflows:
           ls -lh "$IPA_PATH"
 
       # ======================================================
-      # 10. KIEM TRA IPA
+      # 10. VERIFY IPA
       # ======================================================
       - name: Verify IPA
         script: |
@@ -433,6 +433,6 @@ workflows:
           echo "======================================"
 
     artifacts:
-      - APEX-IPA-*.ipa
+      - X7-EXTERNAL-*.ipa
       - build/Release-iphoneos/**/*.app
       - build/**/*.app

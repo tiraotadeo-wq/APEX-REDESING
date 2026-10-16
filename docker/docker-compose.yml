@@ -1,0 +1,35 @@
+# VPS fallback only. Do not use this compose file for Netlify deployment.
+# Before production: set strong secrets, enable TLS, firewall MySQL to the private Docker network,
+# configure backups, and review PHP app compatibility. PHP/MySQL data is not auto-synced to Supabase.
+services:
+  nginx:
+    image: nginx:1.28-alpine
+    ports: ["80:80"]
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../WEBSITE:/var/www/html:ro
+    depends_on: [php]
+    restart: unless-stopped
+  php:
+    build: ./php
+    volumes:
+      - ../WEBSITE:/var/www/html
+    environment:
+      DB_HOST: mysql
+      DB_NAME: x7_external
+      DB_USER: ${MYSQL_USER:-x7app}
+      DB_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in a private .env file}
+    depends_on: [mysql]
+    restart: unless-stopped
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: x7_external
+      MYSQL_USER: ${MYSQL_USER:-x7app}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in a private .env file}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in a private .env file}
+    volumes: ["mysql_data:/var/lib/mysql"]
+    networks: [default]
+    restart: unless-stopped
+volumes:
+  mysql_data:

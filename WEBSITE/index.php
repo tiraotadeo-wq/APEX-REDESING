@@ -9,7 +9,9 @@ if (!is_array($config)) $config = [];
 function pageText(array $c,string $k,string $f):string{$v=trim((string)($c[$k]??''));return htmlspecialchars($v!==''?$v:$f,ENT_QUOTES,'UTF-8');}
 function pageURL(array $c,string $k):string{$v=trim((string)($c[$k]??''));return filter_var($v,FILTER_VALIDATE_URL)?htmlspecialchars($v,ENT_QUOTES,'UTF-8'):'';}
 $title=pageText($config,'brandTitle','X7 EXTERNAL');
-$subtitle=pageText($config,'brandSubtitle','Quản lý thiết bị theo cách của bạn.');
+$subtitle=pageText($config,'brandSubtitle','MOONX7 · RED EDITION');
+$bannerURL=pageURL($config,'brandBannerURL');
+$backgroundVideoURL=pageURL($config,'backgroundVideoURL');
 $browserTitle=pageText($config,'browserTitle','X7 EXTERNAL IPA');
 $faviconURL=pageURL($config,'faviconURL');
 $previewImages=[];
@@ -23,11 +25,11 @@ $pricingPlans=is_array($config['pricingPlans']??null)?$config['pricingPlans']:[]
 usort($pricingPlans,static fn($a,$b)=>(int)($a['order']??999)<=>(int)($b['order']??999));
 ?>
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eeeadd">
+<meta name="theme-color" content="#0b0b0e">
 <meta name="description" content="<?= $subtitle ?>">
 <title><?= $browserTitle ?></title>
 <?php if ($faviconURL !== ''): ?>
@@ -38,9 +40,9 @@ usort($pricingPlans,static fn($a,$b)=>(int)($a['order']??999)<=>(int)($b['order'
 <style>
 :root{--paper:#0b0b0e;--ink:#f7f7fa;--muted:#a6a6b0;--line:#292930;--purple:#e11d2e;--acid:#ff5964}*{box-sizing:border-box}html{background:var(--paper)}body{margin:0;color:var(--ink);background:transparent;font-family:"Cabinet Grotesk",system-ui,sans-serif;overflow-x:hidden}.site-background{position:fixed;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}.page{position:relative;z-index:1;width:100%;overflow:hidden}.wrap{width:min(1500px,calc(100% - 48px));margin:auto}
 .top{height:88px;display:grid;grid-template-columns:1fr auto;align-items:center;border-bottom:1px solid var(--line)}.wordmark{font-size:18px;font-weight:900;letter-spacing:-.04em;white-space:pre-wrap}.top-meta{justify-self:end;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.14em}
-.hero{position:relative;isolation:isolate;min-height:calc(100svh - 88px);display:grid;place-items:center;padding:clamp(72px,10vw,150px) 0;text-align:center}.hero:before{content:"";position:absolute;z-index:-2;width:min(850px,78vw);aspect-ratio:1;left:50%;top:45%;translate:-50% -50%;border-radius:50%;background:radial-gradient(circle at 36% 30%,var(--acid),var(--purple) 43%,transparent 70%);filter:blur(24px);opacity:.5;animation:ambient 9s ease-in-out infinite alternate;will-change:transform}.hero:after{content:"";position:absolute;z-index:-1;inset:8% 0;background:linear-gradient(rgba(17,17,15,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,15,.06) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(circle,black,transparent 72%)}
-.hero-core{width:100%;max-width:1180px;margin:auto}.hero-brand{margin:0 0 24px;font-size:clamp(13px,1.2vw,16px);font-weight:900;letter-spacing:.24em;text-transform:uppercase}.hero h1{margin:0;font-size:clamp(4rem,10vw,9.8rem);line-height:.78;letter-spacing:-.085em;font-weight:900;white-space:pre-wrap}.hero h1 em{display:inline-block;font-style:normal;color:var(--purple);text-shadow:4px 4px 0 var(--ink)}.hero-sub{max-width:820px;margin:40px auto 0;color:#55534c;font-size:clamp(18px,2vw,27px);line-height:1.42;font-weight:500}.hero-sub strong{color:var(--ink);font-weight:800}
-.actions{display:flex;justify-content:center;gap:34px;margin-top:44px}.action{position:relative;width:min(260px,100%);min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:18px 22px;border:2px solid var(--ink);font-weight:900;overflow:hidden;transform:translateZ(0);transition:color .28s,box-shadow .28s,border-color .28s}.action span{position:relative;z-index:2}.action:before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(102%);transition:transform .34s cubic-bezier(.2,.8,.2,1)}.action:hover{color:#fff;box-shadow:8px 8px 0 var(--acid)}.action:hover:before{transform:none}.action.primary{background:var(--ink);color:#fff}.action.primary:before{background:var(--purple)}.action.ipa{background:var(--purple);border-color:var(--purple);color:#fff;animation:ipaPulse 2.7s ease-out infinite}.action.ipa:before{background:var(--ink)}.action.ipa:hover{border-color:var(--ink);box-shadow:9px 9px 0 var(--acid)}.download-arrow{display:inline-block;animation:downloadArrow 1.35s ease-in-out infinite}.disabled{opacity:.38;pointer-events:none;animation:none!important}.pricing{padding:110px 0 130px;border-top:1px solid var(--line)}.pricing-head{text-align:center;margin-bottom:54px}.pricing-head span{font-size:12px;font-weight:900;letter-spacing:.2em;color:var(--purple)}.pricing-head h2{margin:12px 0 0;font-size:clamp(42px,7vw,82px);letter-spacing:-.06em}.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:stretch}.price-card{display:flex;flex-direction:column;padding:34px;border:2px solid var(--ink);background:rgba(255,255,255,.42);box-shadow:8px 8px 0 var(--ink)}.price-card.featured{background:var(--ink);color:#fff;box-shadow:10px 10px 0 var(--purple)}.price-card h3{margin:0;font-size:28px}.price-value{margin:22px 0 8px;font-size:42px;font-weight:900;letter-spacing:-.05em}.price-desc{min-height:42px;color:var(--muted)}.featured .price-desc{color:#aaa}.price-features{list-style:none;padding:20px 0;margin:16px 0 28px;border-top:1px solid currentColor}.price-features li{padding:8px 0}.price-features li:before{content:"✓";margin-right:10px;color:var(--purple);font-weight:900}.price-buy{margin-top:auto;display:flex;justify-content:center;padding:16px;border:2px solid currentColor;font-weight:900}.featured .price-buy{background:var(--purple);border-color:var(--purple)}.footer{display:flex;justify-content:center;text-align:center;padding:24px 0 38px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.hero{position:relative;isolation:isolate;min-height:calc(100svh - 88px);display:grid;place-items:center;padding:clamp(72px,10vw,150px) 0;text-align:center}.hero:before{content:"";position:absolute;z-index:-2;width:min(850px,78vw);aspect-ratio:1;left:50%;top:45%;translate:-50% -50%;border-radius:50%;background:radial-gradient(circle at 36% 30%,var(--acid),var(--purple) 43%,transparent 70%);filter:blur(24px);opacity:.5;animation:ambient 9s ease-in-out infinite alternate;will-change:transform}.hero:after{content:"";position:absolute;z-index:-1;inset:8% 0;background:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,15,.06) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(circle,black,transparent 72%)}
+.hero-core{width:100%;max-width:1180px;margin:auto}.brand-banner{display:block;width:min(760px,100%);max-height:240px;object-fit:contain;margin:0 auto 34px;border-radius:18px;filter:drop-shadow(0 0 28px rgba(225,29,46,.24))}.hero-brand{margin:0 0 24px;font-size:clamp(13px,1.2vw,16px);font-weight:900;letter-spacing:.24em;text-transform:uppercase}.hero h1{margin:0;font-size:clamp(4rem,10vw,9.8rem);line-height:.78;letter-spacing:-.085em;font-weight:900;white-space:pre-wrap}.hero h1 em{display:inline-block;font-style:normal;color:var(--purple);text-shadow:4px 4px 0 var(--ink)}.hero-sub{max-width:820px;margin:40px auto 0;color:#c1c1ca;font-size:clamp(18px,2vw,27px);line-height:1.42;font-weight:500}.hero-sub strong{color:var(--ink);font-weight:800}
+.actions{display:flex;justify-content:center;gap:34px;margin-top:44px}.action{position:relative;width:min(260px,100%);min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:18px 22px;border:2px solid var(--ink);font-weight:900;overflow:hidden;transform:translateZ(0);transition:color .28s,box-shadow .28s,border-color .28s}.action span{position:relative;z-index:2}.action:before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(102%);transition:transform .34s cubic-bezier(.2,.8,.2,1)}.action:hover{color:#fff;box-shadow:8px 8px 0 var(--acid)}.action:hover:before{transform:none}.action.primary{background:var(--ink);color:#fff}.action.primary:before{background:var(--purple)}.action.ipa{background:var(--purple);border-color:var(--purple);color:#fff;animation:ipaPulse 2.7s ease-out infinite}.action.ipa:before{background:var(--ink)}.action.ipa:hover{border-color:var(--ink);box-shadow:9px 9px 0 var(--acid)}.download-arrow{display:inline-block;animation:downloadArrow 1.35s ease-in-out infinite}.disabled{opacity:.38;pointer-events:none;animation:none!important}.pricing{padding:110px 0 130px;border-top:1px solid var(--line)}.pricing-head{text-align:center;margin-bottom:54px}.pricing-head span{font-size:12px;font-weight:900;letter-spacing:.2em;color:var(--purple)}.pricing-head h2{margin:12px 0 0;font-size:clamp(42px,7vw,82px);letter-spacing:-.06em}.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:stretch}.price-card{display:flex;flex-direction:column;padding:34px;border:2px solid var(--ink);background:rgba(20,20,26,.82);box-shadow:8px 8px 0 var(--ink)}.price-card.featured{background:var(--ink);color:#fff;box-shadow:10px 10px 0 var(--purple)}.price-card h3{margin:0;font-size:28px}.price-value{margin:22px 0 8px;font-size:42px;font-weight:900;letter-spacing:-.05em}.price-desc{min-height:42px;color:var(--muted)}.featured .price-desc{color:#aaa}.price-features{list-style:none;padding:20px 0;margin:16px 0 28px;border-top:1px solid currentColor}.price-features li{padding:8px 0}.price-features li:before{content:"✓";margin-right:10px;color:var(--purple);font-weight:900}.price-buy{margin-top:auto;display:flex;justify-content:center;padding:16px;border:2px solid currentColor;font-weight:900}.featured .price-buy{background:var(--purple);border-color:var(--purple)}.footer{display:flex;justify-content:center;text-align:center;padding:24px 0 38px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 .top-dot{display:none}.hero-core:after{content:"\2193\A SCROLL VIEW";white-space:pre;position:absolute;left:50%;bottom:18px;translate:-50% 0;color:#fff;text-shadow:0 0 8px rgba(255,255,255,.95),0 0 20px rgba(255,255,255,.75),0 2px 5px rgba(0,0,0,.8);font-size:10px;line-height:2;font-weight:900;letter-spacing:.22em;animation:scrollCue 1.5s ease-in-out infinite}
 .scroll-cue{position:absolute;left:50%;bottom:20px;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--ink);font-size:10px;font-weight:900;letter-spacing:.22em;cursor:pointer;z-index:2}.scroll-cue svg{width:18px;height:24px;animation:scrollCue 1.5s ease-in-out infinite}.pricing{position:relative;perspective:1100px}.pricing:before{content:"";position:absolute;width:420px;height:420px;right:-180px;top:10%;border-radius:50%;background:var(--purple);filter:blur(150px);opacity:.11;pointer-events:none}.price-card{position:relative;overflow:hidden;transform-style:preserve-3d;transition:box-shadow .45s cubic-bezier(.2,.8,.2,1),border-color .3s,background .3s}.price-card:after{content:"";position:absolute;inset:-70%;background:linear-gradient(115deg,transparent 43%,rgba(255,255,255,.7) 49%,transparent 55%);transform:translateX(-38%) rotate(8deg);transition:transform .8s cubic-bezier(.2,.8,.2,1);pointer-events:none}.price-card:hover{border-color:var(--purple);box-shadow:14px 16px 0 var(--purple)}.price-card:hover:after{transform:translateX(38%) rotate(8deg)}.price-card.featured:hover{box-shadow:16px 18px 0 var(--acid)}.price-card>*{position:relative;z-index:1}.price-card h3,.price-value,.price-features li{transition:transform .35s cubic-bezier(.2,.8,.2,1),color .3s}.price-card:hover h3,.price-card:hover .price-features li{transform:translateX(5px)}.price-card:hover h3{color:var(--purple)}.price-card.featured:hover h3{color:var(--acid)}.price-card:hover .price-value{transform:scale(1.045);transform-origin:left center}.price-value{margin:14px 0 2px}.price-desc{min-height:0;margin:4px 0}.price-desc:empty{display:none}.price-features{padding:13px 0 10px;margin:8px 0 18px}.price-buy{transition:background .3s,color .3s,transform .3s}.price-buy:hover{background:var(--ink);color:#fff;transform:translateY(-3px)}.featured .price-buy:hover{background:var(--acid);border-color:var(--acid);color:var(--ink)}
 /* ===== PREVIEW GALLERY WITH NAVIGATION ===== */
@@ -51,7 +53,7 @@ usort($pricingPlans,static fn($a,$b)=>(int)($a['order']??999)<=>(int)($b['order'
 .preview-gallery{display:flex;justify-content:flex-start;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 16px 34px;overscroll-behavior-inline:contain;scroll-behavior:smooth}
 .preview-gallery::-webkit-scrollbar{display:none}
 .preview-gallery{-ms-overflow-style:none;scrollbar-width:none}
-.preview-frame{flex:0 0 auto;width:max-content;max-width:calc(100vw - 64px);margin:0;scroll-snap-align:center;padding:12px;border:2px solid var(--ink);background:rgba(255,255,255,.48);box-shadow:12px 14px 0 var(--purple);overflow:hidden}
+.preview-frame{flex:0 0 auto;width:max-content;max-width:calc(100vw - 64px);margin:0;scroll-snap-align:center;padding:12px;border:2px solid var(--ink);background:rgba(20,20,26,.82);box-shadow:12px 14px 0 var(--purple);overflow:hidden}
 .preview-frame:only-child{margin-inline:auto}
 .preview-frame img{display:block;width:auto;max-width:calc(100vw - 92px);height:auto;max-height:min(66svh,720px);object-fit:contain;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .8s}
 .preview-frame:hover img{transform:scale(1.025);filter:contrast(1.04)}
@@ -72,7 +74,7 @@ usort($pricingPlans,static fn($a,$b)=>(int)($a['order']??999)<=>(int)($b['order'
 </style>
 </head>
 <body>
-<video class="site-background" autoplay muted loop playsinline preload="auto" aria-hidden="true"><source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260429_114316_1c7889ad-2885-410e-b493-98119fee0ddb.mp4" type="video/mp4"></video>
+<?php if ($backgroundVideoURL !== ''): ?><video class="site-background" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="<?= $backgroundVideoURL ?>" type="video/mp4"></video><?php endif; ?>
 <main class="page">
 <header class="top wrap">
 <div class="wordmark"><?= $title ?></div>
@@ -80,11 +82,12 @@ usort($pricingPlans,static fn($a,$b)=>(int)($a['order']??999)<=>(int)($b['order'
 </header>
 <section class="hero wrap">
 <div class="hero-core">
+<?php if ($bannerURL !== ''): ?><img class="brand-banner" src="<?= $bannerURL ?>" alt="MOONX7 animated banner" fetchpriority="high"><?php endif; ?>
 <h1><?= $title ?></h1>
 <p class="hero-sub"><strong><?= $subtitle ?></strong></p>
 <div class="actions">
 <a class="action primary magnetic<?= $getKeyURL===''?' disabled':'' ?>" href="<?= $getKeyURL!==''?$getKeyURL:'#' ?>" target="_blank" rel="noopener"><span>GET KEY</span><span>↗</span></a>
-<a class="action ipa magnetic<?= $ipaURL===''?' disabled':'' ?>" href="<?= $ipaURL!==''?$ipaURL:'#' ?>" target="_blank" rel="noopener"><span>TẢI FILE IPA [<?= htmlspecialchars($latestVersion,ENT_QUOTES,'UTF-8') ?>]</span><span class="download-arrow">↓</span></a>
+<a class="action ipa magnetic<?= $ipaURL===''?' disabled':'' ?>" href="<?= $ipaURL!==''?$ipaURL:'#' ?>" target="_blank" rel="noopener"><span>DOWNLOAD IPA [<?= htmlspecialchars($latestVersion,ENT_QUOTES,'UTF-8') ?>]</span><span class="download-arrow">↓</span></a>
 </div>
 </div>
 </section>
@@ -92,21 +95,21 @@ usort($pricingPlans,static fn($a,$b)=>(int)($a['order']??999)<=>(int)($b['order'
 <section class="pricing">
 <div class="wrap">
 <div class="pricing-head">
-<span>BẢNG GIÁ</span>
-<h2>CHỌN GÓI PHÙ HỢP</h2>
+<span>PRICING</span>
+<h2>CHOOSE YOUR PLAN</h2>
 </div>
 <div class="pricing-grid">
 <?php foreach($pricingPlans as $plan): $planURL=filter_var(trim((string)($plan['url']??'')),FILTER_VALIDATE_URL)?htmlspecialchars(trim((string)$plan['url']),ENT_QUOTES,'UTF-8'):'#'; ?>
 <article class="price-card<?= !empty($plan['featured'])?' featured':'' ?>">
-<h3><?= pageText($plan,'name','Gói dịch vụ') ?></h3>
-<div class="price-value"><?= pageText($plan,'price','Liên hệ') ?></div>
+<h3><?= pageText($plan,'name','Service plan') ?></h3>
+<div class="price-value"><?= pageText($plan,'price','Contact us') ?></div>
 <p class="price-desc"><?= pageText($plan,'description','') ?></p>
 <ul class="price-features">
 <?php foreach((array)($plan['features']??[]) as $feature): ?>
 <li><?= htmlspecialchars((string)$feature,ENT_QUOTES,'UTF-8') ?></li>
 <?php endforeach; ?>
 </ul>
-<a class="price-buy<?= $planURL==='#'?' disabled':'' ?>" href="<?= $planURL ?>" target="_blank" rel="noopener"><?= pageText($plan,'buttonText','MUA NGAY') ?></a>
+<a class="price-buy<?= $planURL==='#'?' disabled':'' ?>" href="<?= $planURL ?>" target="_blank" rel="noopener"><?= pageText($plan,'buttonText','BUY NOW') ?></a>
 </article>
 <?php endforeach; ?>
 </div>
@@ -125,8 +128,8 @@ usort($pricingPlans,static fn($a,$b)=>(int)($a['order']??999)<=>(int)($b['order'
 <?php endforeach; ?>
 </div>
 <?php if(count($previewImages) > 1): ?>
-<button class="preview-nav prev" id="prevBtn" aria-label="Ảnh trước"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
-<button class="preview-nav next" id="nextBtn" aria-label="Ảnh tiếp theo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+<button class="preview-nav prev" id="prevBtn" aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+<button class="preview-nav next" id="nextBtn" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
 <?php endif; ?>
 </div>
 </section>

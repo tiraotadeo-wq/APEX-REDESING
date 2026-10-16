@@ -57,7 +57,7 @@ usort($pricingPlans,static fn($a,$b)=>(int)($a['order']??999)<=>(int)($b['order'
 .preview-frame:only-child{margin-inline:auto}
 .preview-frame img{display:block;width:auto;max-width:calc(100vw - 92px);height:auto;max-height:min(66svh,720px);object-fit:contain;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .8s}
 .preview-frame:hover img{transform:scale(1.025);filter:contrast(1.04)}
-/* Navigation buttons - hình tròn với < > bên trong */
+/* Circular navigation buttons with left/right chevrons */
 .preview-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:52px;height:52px;padding:0;border-radius:50%;background:rgba(255,255,255,.92);border:2px solid var(--ink);color:var(--ink);font-size:0;cursor:pointer;display:grid;place-items:center;transition:all .3s cubic-bezier(.2,.8,.2,1);box-shadow:0 4px 16px rgba(0,0,0,.1);user-select:none;-webkit-tap-highlight-color:transparent}
 .preview-nav svg{display:block;width:23px;height:23px;margin:0;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .preview-nav:hover{background:var(--purple);border-color:var(--purple);color:#fff;transform:translateY(-50%) scale(1.1);box-shadow:0 8px 24px rgba(112,87,255,.35)}

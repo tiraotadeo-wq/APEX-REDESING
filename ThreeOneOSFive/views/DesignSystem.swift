@@ -99,7 +99,7 @@ enum AppAccentSpectrum: String, CaseIterable, Identifiable {
     static func nearest(to position: Double) -> AppAccentSpectrum {
         allCases.min(by: {
             abs($0.spectrumPosition - position) < abs($1.spectrumPosition - position)
-        }) ?? .azure
+        }) ?? .crimson
     }
 }
 
@@ -138,7 +138,7 @@ enum AppTheme {
     static var accentGradient: LinearGradient {
         let raw = UserDefaults.standard.string(forKey: AppThemePreferences.accentStorageKey)
             ?? AppThemePreferences.defaultAccent.rawValue
-        return (AppAccentSpectrum(rawValue: raw) ?? .azure).gradient
+        return (AppAccentSpectrum(rawValue: raw) ?? .crimson).gradient
     }
 
     static let canvas = Color(

@@ -110,7 +110,7 @@ enum AppThemePreferences {
     static let accentStorageKey = "theme.accent.spectrum"
     static let spectrumSliderStorageKey = "theme.accent.spectrum.position"
 
-    static var defaultAppearance: AppAppearanceMode { .system }
+    static var defaultAppearance: AppAppearanceMode { .dark }
     static var defaultAccent: AppAccentSpectrum { .crimson }
 }
 

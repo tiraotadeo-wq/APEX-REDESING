@@ -391,7 +391,7 @@ private struct MandatoryUpdateView: View {
                 Text("CẬP NHẬT BẮT BUỘC")
                     .font(.title2.weight(.black))
                     .multilineTextAlignment(.center)
-                Text("APEX IPA [\(requirement.version)]")
+                Text("X7 EXTERNAL [\(requirement.version)]")
                     .font(.headline.monospaced())
                 Text(requirement.message)
                     .foregroundStyle(.secondary)

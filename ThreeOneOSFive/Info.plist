@@ -63,7 +63,7 @@
                 <string>public.data</string>
             </array>
             <key>UTTypeDescription</key>
-            <string>APEX IPA Patch Package</string>
+            <string>X7 EXTERNAL Patch Package</string>
             <key>UTTypeIdentifier</key>
             <string>com.yangjiii.3105.patch-package</string>
             <key>UTTypeTagSpecification</key>
@@ -90,9 +90,9 @@
         <string>audio</string>
     </array>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>APEX IPA needs access to photos for wallpaper customization.</string>
+    <string>X7 EXTERNAL needs access to photos for wallpaper customization.</string>
     <key>NSDocumentsFolderUsageDescription</key>
-    <string>APEX IPA needs access to documents.</string>
+    <string>X7 EXTERNAL needs access to documents.</string>
     <key>UIApplicationSceneManifest</key>
     <dict>
         <key>UIApplicationSupportsMultipleScenes</key>

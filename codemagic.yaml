@@ -1,6 +1,6 @@
 workflows:
   ios-build:
-    name: APEX IPA Build
+    name: X7 EXTERNAL IPA Build
     instance_type: mac_mini_m2
     max_build_duration: 60
 
@@ -9,7 +9,7 @@ workflows:
 
     scripts:
       # ======================================================
-      # 1. KIEM TRA SOURCE
+      # 1. SOURCE CHECK
       # ======================================================
       - name: Check source
         script: |
@@ -58,7 +58,7 @@ workflows:
           xcrun --sdk iphoneos --show-sdk-version
 
       # ======================================================
-      # 3. TIM PROJECT
+      # 3. PROJECT DISCOVERY
       # ======================================================
       - name: Detect project
         script: |
@@ -75,7 +75,7 @@ workflows:
             | head -1)
 
           if [ -z "$PROJECT" ]; then
-            echo "ERROR: Khong tim thay .xcodeproj"
+            echo "ERROR: No .xcodeproj found"
             exit 1
           fi
 
@@ -89,7 +89,7 @@ workflows:
           xcodebuild -list -project "$PROJECT"
 
       # ======================================================
-      # 4. XOA BUILD CU
+      # 4. CLEAN PREVIOUS BUILD
       # ======================================================
       - name: Clean output
         script: |
@@ -109,15 +109,15 @@ workflows:
       # ======================================================
       # 5. BUILD
       #
-      # QUAN TRONG:
-      # DUNG LAI LENH DA BUILD SUCCEEDED CUA BAN
+      # IMPORTANT:
+      # Reuse the known successful build command
       # ======================================================
-      - name: Build APEX IPA
+      - name: Build X7 EXTERNAL IPA
         script: |
           cd "$CM_BUILD_DIR"
 
           echo "======================================"
-          echo "BUILD APEX IPA"
+          echo "BUILD X7 EXTERNAL IPA"
           echo "======================================"
 
           PROJECT=$(cat /tmp/xcode_project.txt)

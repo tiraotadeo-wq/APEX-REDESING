@@ -8,9 +8,9 @@ $config = is_string($raw) ? json_decode($raw, true) : [];
 if (!is_array($config)) $config = [];
 function pageText(array $c,string $k,string $f):string{$v=trim((string)($c[$k]??''));return htmlspecialchars($v!==''?$v:$f,ENT_QUOTES,'UTF-8');}
 function pageURL(array $c,string $k):string{$v=trim((string)($c[$k]??''));return filter_var($v,FILTER_VALIDATE_URL)?htmlspecialchars($v,ENT_QUOTES,'UTF-8'):'';}
-$title=pageText($config,'brandTitle','APEX IPA');
+$title=pageText($config,'brandTitle','X7 EXTERNAL');
 $subtitle=pageText($config,'brandSubtitle','Quản lý thiết bị theo cách của bạn.');
-$browserTitle=pageText($config,'browserTitle','APEX IPA');
+$browserTitle=pageText($config,'browserTitle','X7 EXTERNAL IPA');
 $faviconURL=pageURL($config,'faviconURL');
 $previewImages=[];
 foreach((array)($config['landingPreviewImages']??[]) as $image){$url=trim((string)($image['url']??$image));if(filter_var($url,FILTER_VALIDATE_URL))$previewImages[]=['url'=>htmlspecialchars($url,ENT_QUOTES,'UTF-8'),'alt'=>pageText(is_array($image)?$image:[],'alt','Preview')];}
@@ -36,7 +36,7 @@ usort($pricingPlans,static fn($a,$b)=>(int)($a['order']??999)<=>(int)($b['order'
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#eeeadd;--ink:#11110f;--muted:#66645d;--line:#cbc6b9;--purple:#7057ff;--acid:#d8ff52}*{box-sizing:border-box}html{background:var(--paper)}body{margin:0;color:var(--ink);background:transparent;font-family:"Cabinet Grotesk",system-ui,sans-serif;overflow-x:hidden}.site-background{position:fixed;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}.page{position:relative;z-index:1;width:100%;overflow:hidden}.wrap{width:min(1500px,calc(100% - 48px));margin:auto}
+:root{--paper:#0b0b0e;--ink:#f7f7fa;--muted:#a6a6b0;--line:#292930;--purple:#e11d2e;--acid:#ff5964}*{box-sizing:border-box}html{background:var(--paper)}body{margin:0;color:var(--ink);background:transparent;font-family:"Cabinet Grotesk",system-ui,sans-serif;overflow-x:hidden}.site-background{position:fixed;z-index:0;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}.page{position:relative;z-index:1;width:100%;overflow:hidden}.wrap{width:min(1500px,calc(100% - 48px));margin:auto}
 .top{height:88px;display:grid;grid-template-columns:1fr auto;align-items:center;border-bottom:1px solid var(--line)}.wordmark{font-size:18px;font-weight:900;letter-spacing:-.04em;white-space:pre-wrap}.top-meta{justify-self:end;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.14em}
 .hero{position:relative;isolation:isolate;min-height:calc(100svh - 88px);display:grid;place-items:center;padding:clamp(72px,10vw,150px) 0;text-align:center}.hero:before{content:"";position:absolute;z-index:-2;width:min(850px,78vw);aspect-ratio:1;left:50%;top:45%;translate:-50% -50%;border-radius:50%;background:radial-gradient(circle at 36% 30%,var(--acid),var(--purple) 43%,transparent 70%);filter:blur(24px);opacity:.5;animation:ambient 9s ease-in-out infinite alternate;will-change:transform}.hero:after{content:"";position:absolute;z-index:-1;inset:8% 0;background:linear-gradient(rgba(17,17,15,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(17,17,15,.06) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(circle,black,transparent 72%)}
 .hero-core{width:100%;max-width:1180px;margin:auto}.hero-brand{margin:0 0 24px;font-size:clamp(13px,1.2vw,16px);font-weight:900;letter-spacing:.24em;text-transform:uppercase}.hero h1{margin:0;font-size:clamp(4rem,10vw,9.8rem);line-height:.78;letter-spacing:-.085em;font-weight:900;white-space:pre-wrap}.hero h1 em{display:inline-block;font-style:normal;color:var(--purple);text-shadow:4px 4px 0 var(--ink)}.hero-sub{max-width:820px;margin:40px auto 0;color:#55534c;font-size:clamp(18px,2vw,27px);line-height:1.42;font-weight:500}.hero-sub strong{color:var(--ink);font-weight:800}

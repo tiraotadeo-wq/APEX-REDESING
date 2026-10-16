@@ -1,26 +1,30 @@
-# X7 EXTERNAL / MOONX7 — Branding assets
+# X7 EXTERNAL / MOONX7 — Branding Assets
 
-Place the owner's original brand assets in this folder before release.
+## Español
 
-## Expected structure
+Coloca aquí los recursos originales de la marca.
 
-- `Appicon/` — source app icon artwork (prefer a 1024×1024 PNG without pre-rounded corners; verify the Xcode AppIcon asset catalog before replacing generated sizes).
-- `MOONX7logo/` — transparent PNG logo and approved variants.
-- `Banners/` — original animated GIF banner(s) for the app and website.
+- `Appicon/MOONX7Logo.png`: icono de la app (el asset de Xcode usa `ThreeOneOSFive/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png`).
+- `MOONX7logo/MOONX7Logo.png`: logotipo PNG.
+- `Banners/realm-banner.gif`: banner animado.
+- `BackgroundMedia/background.mp4`: vídeo de fondo de la app.
 
-The uploaded assets should replace the existing app icon through `ThreeOneOSFive/Assets.xcassets/AppIcon.appiconset/` and be wired into the SwiftUI/web views only after checking actual filenames and dimensions. Keep source artwork here for traceability. Do not commit signing certificates, provisioning profiles, API keys, Supabase service-role keys, or other secrets.
+La app usa el fondo mediante la configuración remota `backgroundVideoURL`. El sitio utiliza `brandBannerURL` para mostrar el GIF. Comprueba las URL HTTPS y el tamaño de los archivos antes de publicar.
 
-## Brand direction
+## English
 
-- Product name: **X7 EXTERNAL**
-- Brand mark: **MOONX7**
-- Palette: near-black surfaces, vivid red/crimson accents, white/light-gray text.
-- Preserve the existing bundle identifier unless a deliberate migration is planned; changing it may affect installation and existing integrations.
+Place the original brand assets here.
 
-## Release checklist
+- `Appicon/MOONX7Logo.png`: app icon source (the Xcode asset is `ThreeOneOSFive/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png`).
+- `MOONX7logo/MOONX7Logo.png`: PNG logo.
+- `Banners/realm-banner.gif`: animated banner.
+- `BackgroundMedia/background.mp4`: app background video.
 
-1. Confirm source artwork is present and valid.
-2. Update the Xcode AppIcon catalog and verify all references.
-3. Check GIF playback and file size on the website and app.
-4. Build with the configured macOS/Xcode CI runner.
-5. Inspect the generated IPA and website deployment before release.
+The app uses the background through the remote `backgroundVideoURL` configuration. The website displays the GIF through `brandBannerURL`. Verify the HTTPS URLs and file sizes before release.
+
+### Release checks / Comprobaciones de publicación
+- Verify the iOS app icon and all asset references.
+- Verify that the background video loops without blocking navigation.
+- Verify website links, admin access, database settings, and download URL.
+- Build on macOS/Xcode and confirm the generated IPA artifact.
+- Never commit signing certificates, provisioning profiles, passwords, or service-role keys.

@@ -1,14 +1,14 @@
 {
-  "noticeTitle": "Thông báo",
-  "noticeMessage": "MỌI NHỚ TEST ACC KHÁCH TRƯỚC RỒI MỚI DÙNG ACC CHÍNH NHÉ.\nTIPS : ACC KHÁCH BAN = XÓA GAME TẢI LẠI.\n",
+  "noticeTitle": "Important notice",
+  "noticeMessage": "Use a guest account to test first. Do not risk your main account.",
   "maintenanceEnabled": false,
   "maintenanceTitle": "MAINTENANCE",
   "maintenanceMessage": "",
   "brandTitle": "X7 EXTERNAL",
   "brandSubtitle": "MOONX7 · RED EDITION",
   "browserTitle": "X7 EXTERNAL — MOONX7",
-  "faviconURL": "https://ipa.apexproxy.store/uploads/1787841726-IMG_0459.jpeg",
-  "brandAvatarURL": "https://sf-static.upanhlaylink.com/img/image_20260826e9cd339efa9b59462a3e1c1a6a7ed09f.jpg",
+  "faviconURL": "https://raw.githubusercontent.com/tiraotadeo-wq/APEX-REDESING/rebrand/x7-external-moonx7/BRANDING/Appicon/MOONX7Logo.png",
+  "brandAvatarURL": "https://raw.githubusercontent.com/tiraotadeo-wq/APEX-REDESING/rebrand/x7-external-moonx7/BRANDING/Appicon/MOONX7Logo.png",
   "landingPreviewImageURL": "https://ipa.apexproxy.store/uploads/1787901214-photo_2026-03-28_20-48-36.jpg",
   "getKeyURL": "https://proxy.huutien.store/get-key/qswv1uj3",
   "ipaDownloadURL": "https://files.catbox.moe/38g4tz.ipa",
@@ -78,7 +78,7 @@
   ],
   "pricingPlans": [
     {
-      "name": "THÁNG",
+      "name": "Monthly",
       "price": "100,000Đ",
       "description": "",
       "features": [
@@ -89,13 +89,13 @@
         "DAZZ CAM",
         "TelephonyUI"
       ],
-      "buttonText": "MUA NGAY",
+      "buttonText": "BUY NOW",
       "url": "https://t.me/htios2590",
       "featured": true,
       "order": 1
     },
     {
-      "name": "TUẦN",
+      "name": "Weekly",
       "price": "60,000Đ",
       "description": "",
       "features": [
@@ -106,13 +106,13 @@
         "DAZZ CAM",
         "TelephonyUI"
       ],
-      "buttonText": "MUA NGAY",
+      "buttonText": "BUY NOW",
       "url": "https://t.me/htios2590",
       "featured": false,
       "order": 2
     },
     {
-      "name": "NGÀY",
+      "name": "Daily",
       "price": "20,000Đ",
       "description": "",
       "features": [
@@ -123,13 +123,13 @@
         "DAZZ CAM",
         "TelephonyUI"
       ],
-      "buttonText": "MUA NGAY",
+      "buttonText": "BUY NOW",
       "url": "https://t.me/htios2590",
       "featured": false,
       "order": 3
     },
     {
-      "name": "1 GIỜ",
+      "name": "1 Hour",
       "price": "5,000Đ",
       "description": "",
       "features": [
@@ -140,7 +140,7 @@
         "DAZZ CAM",
         "TelephonyUI"
       ],
-      "buttonText": "MUA NGAY",
+      "buttonText": "BUY NOW",
       "url": "https://t.me/htios2590",
       "featured": false,
       "order": 4
@@ -182,7 +182,7 @@
     },
     {
       "id": "location",
-      "title": "Định vị",
+      "title": "Location",
       "icon": "location.north.circle.fill",
       "order": 2
     },
@@ -524,5 +524,6 @@
       ]
     }
   ],
-  "musicUseBackgroundVideo": true
+  "musicUseBackgroundVideo": true,
+  "brandBannerURL": "https://raw.githubusercontent.com/tiraotadeo-wq/APEX-REDESING/rebrand/x7-external-moonx7/BRANDING/Banners/realm-banner.gif"
 }

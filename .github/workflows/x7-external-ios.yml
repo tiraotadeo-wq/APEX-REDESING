@@ -1,0 +1,80 @@
+name: X7 EXTERNAL iOS Build
+
+on:
+  push:
+    branches:
+      - rebrand/x7-external-moonx7
+    paths:
+      - 'ThreeOneOSFive/**'
+      - 'BRANDING/**'
+      - 'codemagic.yaml'
+      - '.github/workflows/x7-external-ios.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-ios:
+    name: Build and package unsigned IPA
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+          xcodebuild -list -project ThreeOneOSFive.xcodeproj
+
+      - name: Validate website configuration
+        run: |
+          python3 -m json.tool WEBSITE/config.json >/dev/null
+          if command -v php >/dev/null 2>&1; then
+            find WEBSITE -type f -name '*.php' -not -path '*/uploads/*' -print0 | xargs -0 -n1 php -l
+          else
+            echo "PHP is not installed on this runner; PHP syntax checks skipped."
+          fi
+
+      - name: Build iOS target
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project ThreeOneOSFive.xcodeproj \
+            -target 3105 \
+            -configuration Release \
+            -sdk iphoneos \
+            SYMROOT="$GITHUB_WORKSPACE/build" \
+            CONFIGURATION_BUILD_DIR="$GITHUB_WORKSPACE/build/Release-iphoneos" \
+            PRODUCT_NAME=APEXIPA \
+            EXECUTABLE_NAME=APEXIPA \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            clean build
+
+      - name: Package unsigned IPA
+        run: |
+          set -euo pipefail
+          APP_PATH="$GITHUB_WORKSPACE/build/Release-iphoneos/APEXIPA.app"
+          test -d "$APP_PATH"
+          test -f "$APP_PATH/APEXIPA"
+          /usr/libexec/PlistBuddy -c 'Set :CFBundleDisplayName X7 EXTERNAL' "$APP_PATH/Info.plist"
+          /usr/libexec/PlistBuddy -c 'Set :CFBundleName X7 EXTERNAL' "$APP_PATH/Info.plist"
+          mkdir -p "$GITHUB_WORKSPACE/package/Payload"
+          cp -R "$APP_PATH" "$GITHUB_WORKSPACE/package/Payload/"
+          cd "$GITHUB_WORKSPACE/package"
+          /usr/bin/zip -qry "$GITHUB_WORKSPACE/X7-EXTERNAL-unsigned.ipa" Payload
+          test -s "$GITHUB_WORKSPACE/X7-EXTERNAL-unsigned.ipa"
+          unzip -t "$GITHUB_WORKSPACE/X7-EXTERNAL-unsigned.ipa"
+          unzip -l "$GITHUB_WORKSPACE/X7-EXTERNAL-unsigned.ipa" | head -80
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: X7-EXTERNAL-unsigned-IPA
+          path: X7-EXTERNAL-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 14

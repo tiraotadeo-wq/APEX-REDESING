@@ -25,7 +25,7 @@ struct ThreeOneOSFiveApp: App {
     init() {
         Self.configureTransparentContainers()
         setupLogCapture()
-        log("app: APEX IPA launching — iOS \(AppInfo.osVersion) (\(AppInfo.osBuild)) \(AppInfo.machineName)")
+        log("app: X7 EXTERNAL launching — iOS \(AppInfo.osVersion) (\(AppInfo.osBuild)) \(AppInfo.machineName)")
     }
 
     private static func configureTransparentContainers() {
